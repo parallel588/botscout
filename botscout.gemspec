@@ -8,10 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Botscout::VERSION
   spec.authors       = ["Maxim Pechnikov"]
   spec.email         = ["parallel588@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.description   = %q{BotScout}
+  spec.summary       = %q{Ruby bindings for the botscout.com API}
+  spec.homepage      = "http://botscout.com/"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
