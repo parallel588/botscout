@@ -1,4 +1,4 @@
-# Botscout [![Build Status](https://travis-ci.org/parallel588/botscout.png?branch=master)](https://travis-ci.org/parallel588/boutscot)
+# Botscout [![Build Status](https://travis-ci.org/parallel588/botscout.png?branch=master)](https://travis-ci.org/parallel588/botscout)
 
 TODO: Write a gem description
 
