@@ -1,4 +1,5 @@
 require "botscout/version"
+require  'httparty'
 
 module Botscout
   class Client
@@ -12,19 +13,37 @@ module Botscout
     end
 
     def test(options ={})
-      _options = (@key.present? ? { :key => @key } : {}).merge(options)
-      @response = self.class.get('/test', :query => _options)
+      _options = ((@key.nil? || @key.empty?)  ? {} : { :key => @key } ).merge(options)
+      @response = self.class.get('/test/', :query => _options)
 
       Result.new(@response.body)
     end
 
     class Result
-      attr_accessor :response, :result, :matched
+      attr_reader :response, :result, :matched
 
-      def initialize(xml_response = "")
-        @response = xml_response
+      def initialize(response = "")
+        @response = response.to_s
         parse!
       end
+
+      def bot?
+        @result.to_s == "Y"
+      end
+
+      def success?
+        !has_error?
+      end
+
+      def error
+        @response.match(/\A!(.*)/) && $1
+      end
+
+      def has_error?
+        !!@response.match(/\A!/)
+      end
+
+      private
 
       def parse!
         if has_error?
@@ -45,23 +64,7 @@ module Botscout
         self
       end
 
-      def bot?
-        @result.to_s == "Y"
-      end
 
-      def success?
-        !has_error?
-      end
-
-      def error
-        @response.match(/\A!(.*)/) && $1
-      end
-
-      def has_error?
-        !!@response.match(/\A!/)
-      end
-
-      private
       def parse_standart(response_array)
         {
           :count => response_array[2].to_i,

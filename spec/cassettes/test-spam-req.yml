@@ -1,0 +1,32 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://botscout.com/test/?mail=krasnhello@mail.ru
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 08 Jun 2013 18:48:28 GMT
+      Server:
+      - Apache/2.2.16 (Debian)
+      X-Powered-By:
+      - PHP/5.3.10-1~dotdeb.1
+      Vary:
+      - Accept-Encoding
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - text/html
+    body:
+      encoding: UTF-8
+      string: Y|MAIL|0
+    http_version: 
+  recorded_at: Sat, 08 Jun 2013 18:48:27 GMT
+recorded_with: VCR 2.4.0
