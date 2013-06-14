@@ -1,6 +1,5 @@
 # Botscout [![Build Status](https://travis-ci.org/parallel588/botscout.png?branch=master)](https://travis-ci.org/parallel588/botscout)
 
-TODO: Write a gem description
 
 ## Installation
 
@@ -18,7 +17,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    botscout = Botscout::Client.new("key")
+    result = botscout.test mail: email
+    if result.success?
+        Logger.info "Email address is spam: #{email}" if result.bot?
+    else
+        Logger.info "Servis is not available: #{result.error}"
+    end
+
 
 ## Contributing
 
