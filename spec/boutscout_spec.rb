@@ -10,6 +10,14 @@ describe Botscout::Client do
       end
 
     end
+    context "when Botscout is not available (Errno::ETIMEDOUT)" do
+      it "should return Botscout::Client::Result with error" do
+        Botscout::Client.stub(:get).and_raise(Errno::ETIMEDOUT)
+        @client = Botscout::Client.new
+        @result = @client.test(:mail => "krasnhello@mail.ru")
+        expect(@result.error).to eq("Service is not available: Connection timed out")
+      end
+    end
   end
   describe "Result" do
 

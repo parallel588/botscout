@@ -17,6 +17,11 @@ module Botscout
       @response = self.class.get('/test/', :query => _options)
 
       Result.new(@response.body)
+
+    rescue Errno::ECONNRESET, Errno::ETIMEDOUT => ex
+      Result.new("!Service is not available: #{ex.message}")
+    rescue ex
+      Result.new("!Error: #{ex.message}")
     end
 
     class Result
