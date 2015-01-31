@@ -20,7 +20,7 @@ module Botscout
 
     rescue Errno::ECONNRESET, Errno::ETIMEDOUT => ex
       Result.new("!Service is not available: #{ex.message}")
-    rescue ex
+    rescue => ex
       Result.new("!Error: #{ex.message}")
     end
 
