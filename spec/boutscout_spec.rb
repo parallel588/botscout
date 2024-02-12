@@ -6,13 +6,14 @@ describe Botscout::Client do
       VCR.use_cassette("test-spam-req") do
         @client = Botscout::Client.new
         @result = @client.test(:mail => "krasnhello@mail.ru")
-        expect(@result.is_a?(Botscout::Client::Result)).to be_true
+        expect(@result.is_a?(Botscout::Client::Result)).to be true
       end
 
     end
     context "when Botscout is not available (Errno::ETIMEDOUT)" do
       it "should return Botscout::Client::Result with error" do
-        Botscout::Client.stub(:get).and_raise(Errno::ETIMEDOUT)
+        allow(Botscout::Client).to receive(:get).and_raise(Errno::ETIMEDOUT)
+
         @client = Botscout::Client.new
         @result = @client.test(:mail => "krasnhello@mail.ru")
         expect(@result.error).to eq("Service is not available: Connection timed out")
@@ -27,7 +28,7 @@ describe Botscout::Client do
           VCR.use_cassette("test-spam-req") do
             @client = Botscout::Client.new
             @result = @client.test(:mail => "krasnhello@mail.ru")
-            expect(@result.bot?).to be_true
+            expect(@result.bot?).to be true
           end
         end
       end
@@ -36,7 +37,7 @@ describe Botscout::Client do
           VCR.use_cassette("test-not-pam-req") do
             @client = Botscout::Client.new
             @result = @client.test(:mail => "promotion@aliexpress.com")
-            expect(@result.bot?).to be_false
+            expect(@result.bot?).to be false
           end
         end
       end
@@ -56,10 +57,10 @@ describe Botscout::Client do
         expect(@result.error).to eq(" Sorry, but that doesn't appear to be a valid API key.")
       end
       it "#has_error? should return true" do
-        expect(@result.has_error?).to be_true
+        expect(@result.has_error?).to be true
       end
       it "#success? should return false" do
-        expect(@result.success?).to be_false
+        expect(@result.success?).to be false
       end
     end
 
@@ -75,10 +76,10 @@ describe Botscout::Client do
         expect(@result.error).to be_nil
       end
       it "#has_error? should return false" do
-        expect(@result.has_error?).to be_false
+        expect(@result.has_error?).to be false
       end
       it "#success? should return true" do
-        expect(@result.success?).to be_true
+        expect(@result.success?).to be true
       end
     end
 
